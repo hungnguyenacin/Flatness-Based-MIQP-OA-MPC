@@ -1,6 +1,6 @@
 # Flatness-Based Mixed-Integer Obstacle Avoidance MPC (OA-MPC)
 
-A Python implementation and simulation framework for **Flatness-Based Mixed-Integer Obstacle Avoidance Model Predictive Control**, based on the methodology presented by Gratzer et al. (CoDIT 2023):
+A framework for **Flatness-Based Mixed-Integer Obstacle Avoidance Model Predictive Control**, based on the methodology presented by Gratzer et al. (CoDIT 2023):
 
 > **A. L. Gratzer, M. M. Broger, A. Schirrer, and S. Jakubek**, *"Flatness-Based Mixed-Integer Obstacle Avoidance MPC for Collision-Safe Automated Urban Driving,"* in 2023 9th International Conference on Control, Decision and Information Technologies (CoDIT), Rome, Italy, 2023, pp. 1844–1849. DOI: `10.1109/CODIT58514.2023.10284415`
 
@@ -67,19 +67,19 @@ subject to:
 The closed-loop control pipeline executes the following five stages at every sampling step $k$:
 
 ```text
-┌───────────────────┐     ┌────────────────────┐     ┌──────────────────────────────────┐
+┌───────────────────┐      ┌────────────────────┐     ┌──────────────────────────────────┐
 │  x_k, Y_ref, O_k  │────▶│  Transform to Flat │────▶│   Map Physical Input Constraints │
-└───────────────────┘     │  Coordinates (z_k) │     │     (U -> W via x_{k-1} / x_k)   │
-                          └────────────────────┘     └─────────────────┬────────────────┘
-                                                                       │
-┌───────────────────┐     ┌────────────────────┐                       ▼
-│ Apply u_k* =      │◀────│ Inverse Flatness   │     ┌──────────────────────────────────┐
-│ [delta_k*, a_x*]  │     │ Mapping (V_k*->U*) │◀────│  Iterative Collision Detection:  │
-└───────────────────┘     └────────────────────┘     │  1. Solve LTI-MPC (O_col = empty)│
-                                                     │  2. Check G*y <= f + gamma       │
-                                                     │  3. Add colliding obs -> O_col   │
-                                                     │  4. Re-solve MIQP until safe     │
-                                                     └──────────────────────────────────┘
+└───────────────────┘      │  Coordinates (z_k) │     │     (U -> W via x_{k-1} / x_k)   │
+                           └────────────────────┘     └─────────────────┬────────────────┘
+                                                                        │
+┌───────────────────┐      ┌────────────────────┐                       ▼
+│ Apply u_k* =      │◀────│ Inverse Flatness   │      ┌──────────────────────────────────┐
+│ [delta_k*, a_x*]  │      │ Mapping (V_k*->U*) │◀────│  Iterative Collision Detection:  │
+└───────────────────┘      └────────────────────┘     │  1. Solve LTI-MPC (O_col = empty)│
+                                                      │  2. Check G*y <= f + gamma       │
+                                                      │  3. Add colliding obs -> O_col   │
+                                                      │  4. Re-solve MIQP until safe     │
+                                                      └──────────────────────────────────┘
 ```
 
 ---
@@ -97,7 +97,7 @@ pip install numpy scipy matplotlib pillow
 Run the complete S-curved multi-agent overtaking simulation and generate the animation:
 
 ```bash
-python flatness_oa_mpc_full_animation.py
+python flatness_oa_mpc.py
 ```
 
 ### Simulation Scenario Description
