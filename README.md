@@ -26,7 +26,7 @@ This repository implements a modular **Obstacle Avoidance MPC (OA-MPC)** strateg
 ### 1. Kinematic Single-Track Vehicle Model
 Under the zero lateral slip assumption ($v_y \equiv 0$), the nonlinear vehicle dynamics with state $\mathbf{x} = [X, Y, \psi, v_x]^T$ and physical control input $\mathbf{u} = [\delta, a_x]^T$ are given by:
 
-$$\dot{\mathbf{x}} = \begin{bmatrix} \dot{X} \\ \dot{Y} \\ \dot{\psi} \\ \dot{v}_x \end{bmatrix} = \begin{bmatrix} v_x \cos\psi \\ v_x \sin\psi \\ \frac{v_x}{L_{\text{wb}}} \tan\delta \\ a_x \end{bmatrix}$$
+$$\dot{\mathbf{x}} = \begin{bmatrix} \dot{X}; \\ \dot{Y}; \\ \dot{\psi}; \\ \dot{v}_x \end{bmatrix} = \begin{bmatrix} v_x \cos\psi; \\ v_x \sin\psi; \\ \frac{v_x}{L_{\text{wb}}} \tan\delta; \\ a_x \end{bmatrix}$$
 
 where $(X, Y)$ is the rear-axle global position, $\psi$ is the heading angle, $v_x \ge 0$ is the longitudinal velocity, $\delta$ is the front steering angle, $a_x$ is the longitudinal acceleration, and $L_{\text{wb}}$ is the wheelbase.
 
